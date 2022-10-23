@@ -9,7 +9,7 @@ script:
   - black ./
   - flake8 --max-line-length=130 --ignore=F405,F403,F541,W503,E231,E722,F401,E501,F821
   # - flake8 --extend-ignore=E1,E23 .
-  - coverage run --source=mysite,polls manage.py test
+  - coverage run --source=ebdjango,polls manage.py test
 
 after_success:
   coveralls
