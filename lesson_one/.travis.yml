@@ -1,28 +1,15 @@
 language: python
-
 python:
-  - 3.7
+  - "3.8"
 
 install:
   - pip install -r requirements.txt
 
-before_script:
-  - python manage.py migrate
-  - python manage.py collectstatic --noinput
-
 script:
-  - black --check .
-  - flake8 .
-  - coverage run --source=ebdjango,polls manage.py test
+  - black ./
+  - flake8 --max-line-length=130 --ignore=F405,F403,F541,W503,E231,E722,F401,E501,F821
+  # - flake8 --extend-ignore=E1,E23 .
+  - coverage run --source=mysite,polls manage.py test
 
-after_script:
-  - coveralls
-
-addons:
-  homebrew:
-    packages:
-    - beanstalk
-    update: true
-
-
-    
+after_success:
+  coveralls
